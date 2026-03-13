@@ -1,4 +1,9 @@
-export { Task, TaskId, TaskName, TaskStatus } from "@domain/entities/task";
+export {
+  Task,
+  TaskId,
+  TaskDescription,
+  TaskStatus,
+} from "@domain/entities/task";
 
 export { DomainError } from "@errors/domain.error";
 export { InvalidStatusFlowError } from "@errors/tasks.errors";
@@ -18,7 +23,7 @@ import { AddTask } from "@app/use-cases/task/add-task.usecase";
 import { DeleteTask } from "@app/use-cases/task/delete-task.usecase";
 import { ListAllTasks } from "@app/use-cases/task/list-all-tasks.usecase";
 import { ListTasksByStatus } from "@app/use-cases/task/list-tasks-by-status.usecase";
-import { UpdateTaskName } from "@app/use-cases/task/update-task-name.usecase";
+import { UpdateTaskDescription } from "@app/use-cases/task/update-task-name.usecase";
 import { UpdateTaskStatus } from "@app/use-cases/task/update-task-status.usecase";
 import type { TaskQuery } from "@interfaces/queries/task-query.interface";
 import type { TaskRepository } from "@interfaces/repository/task-repository.interface";
@@ -27,7 +32,7 @@ import type { IdGenerator } from "@interfaces/utils/id-generator.interface";
 export class TaskApplication {
   readonly addTask: AddTask;
   readonly deleteTask: DeleteTask;
-  readonly updateTaskName: UpdateTaskName;
+  readonly updateTaskDescription: UpdateTaskDescription;
   readonly updateTaskStatus: UpdateTaskStatus;
 
   readonly listTasks: ListAllTasks;
@@ -40,7 +45,7 @@ export class TaskApplication {
   ) {
     this.addTask = new AddTask(idGenerator, taskRepo);
     this.deleteTask = new DeleteTask(taskRepo);
-    this.updateTaskName = new UpdateTaskName(taskRepo);
+    this.updateTaskDescription = new UpdateTaskDescription(taskRepo);
     this.updateTaskStatus = new UpdateTaskStatus(taskRepo);
 
     this.listTasks = new ListAllTasks(taskQuery);
