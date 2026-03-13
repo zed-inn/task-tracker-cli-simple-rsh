@@ -3,11 +3,10 @@
     "rootDir": "./src",
     "outDir": "./dist",
 
-    "target": "ES2020",
-    "module": "ES2020",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "target": "esnext",
+    "moduleResolution": "nodenext",
 
-    "sourceRoot": "./",
     "paths": {
       "@errors/*": ["./src/domain/errors/*", "./src/application/errors/*"],
       "@interfaces/*": ["./src/application/interfaces/*"],
@@ -27,7 +26,7 @@
     "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
 
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": false,
     "isolatedModules": true,
 
     "forceConsistentCasingInFileNames": true,
@@ -35,6 +34,5 @@
 
     "composite": true
   },
-  "include": ["src"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src"]
 }

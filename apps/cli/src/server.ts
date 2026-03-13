@@ -49,6 +49,7 @@ async function main() {
               ListTasksByStatusSchema.parse({ status: args[0] }),
             )
           : core.listTasks.execute());
+        if (tasks.length === 0) console.log("No task found.");
         for (const task of tasks) console.log(task);
         break;
 

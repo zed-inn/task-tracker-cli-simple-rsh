@@ -2,14 +2,13 @@
   "name": "task-tracker-cli",
   "version": "1.0.0",
   "description": "CLI app of task tracker",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "type": "module",
+  "main": "dist/server.js",
+  "types": "dist/server.d.ts",
   "scripts": {
     "clean": "rm -rf dist tsconfig.tsbuildinfo",
-    "build": "npm run clean && npx tsc && npx tsc-alias",
+    "build": "npm run clean && npx tsc -p tsconfig.json && npx tsc-alias",
     "dev": "nodemon",
-    "start": "node dist/index.js"
+    "start": "node dist/server.js"
   },
   "author": "zed",
   "license": "ISC",
