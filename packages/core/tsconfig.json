@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+
+    "sourceRoot": "./",
+    "paths": {
+      "@errors/*": ["./src/domain/errors/*", "./src/application/errors/*"],
+      "@interfaces/*": ["./src/application/interfaces/*"],
+      "@app/*": ["./src/application/*"],
+      "@domain/*": ["./src/domain/*"]
+    },
+    "esModuleInterop": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitOverride": true,
+
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    "composite": true
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"]
+}

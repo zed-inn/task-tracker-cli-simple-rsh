@@ -1,0 +1,19 @@
+{
+  "name": "task_tracker_core",
+  "version": "1.0.0",
+  "description": "Tracks tasks: done, pending, working",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "build": "npm run clean && npx tsc && npx tsc-alias"
+  },
+  "author": "zed",
+  "license": "ISC",
+  "devDependencies": {
+    "tsc-alias": "^1.8.16",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
