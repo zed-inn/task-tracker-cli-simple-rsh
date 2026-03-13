@@ -1,10 +1,10 @@
-import type { TaskStatus } from "@domain/entities/task";
+import type { TaskStatus, TaskStatusType } from "@domain/entities/task";
 import type { KeysetPagination, PaginatedResult } from "./pagination";
 
 export interface TaskReadModel {
   id: string;
-  name: string;
-  status: "PENDING" | "DONE" | "IN PROGRESS";
+  description: string;
+  status: TaskStatusType;
   createdAt: Date;
   updatedAt: Date;
 }

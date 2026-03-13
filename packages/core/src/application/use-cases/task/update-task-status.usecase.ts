@@ -1,4 +1,4 @@
-import { TaskId, TaskStatus } from "@domain/entities/task";
+import { TaskId, TaskStatus, type TaskStatusType } from "@domain/entities/task";
 import { InvalidStatusFlowError } from "@errors/tasks.errors";
 import type { TaskRepository } from "@interfaces/repository/task-repository.interface";
 
@@ -11,7 +11,10 @@ export class UpdateTaskStatus {
   constructor(private readonly taskRepo: TaskRepository) {}
 
   serialize(cmd: UpdateTaskStatusCommand) {
-    return { id: new TaskId(cmd.id), status: new TaskStatus(cmd.status) };
+    return {
+      id: new TaskId(cmd.id),
+      status: new TaskStatus(cmd.status as TaskStatusType),
+    };
   }
 
   async execute(cmd: UpdateTaskStatusCommand) {
@@ -19,9 +22,9 @@ export class UpdateTaskStatus {
 
     const task = await this.taskRepo.getById(id);
 
-    if (status.v === "IN PROGRESS" && task.status.v === "PENDING")
+    if (task.status.v === "todo" && status.v === "in-progress")
       task.markAsInProgress();
-    else if (status.v === "DONE" && task.status.v === "IN PROGRESS")
+    else if (task.status.v === "in-progress" && status.v === "done")
       task.markAsDone();
     else throw new InvalidStatusFlowError(task.status.v, status.v);
 

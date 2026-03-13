@@ -1,4 +1,4 @@
-import { TaskStatus } from "@domain/entities/task";
+import { TaskStatus, type TaskStatusType } from "@domain/entities/task";
 import type { KeysetPagination } from "@interfaces/queries/pagination";
 import type { TaskQuery } from "@interfaces/queries/task-query.interface";
 
@@ -11,7 +11,7 @@ export class ListTasksByStatus {
   constructor(private readonly taskQuery: TaskQuery) {}
 
   serialize(cmd: ListTasksByStatusCommand) {
-    return { ...cmd, status: new TaskStatus(cmd.status) };
+    return { ...cmd, status: new TaskStatus(cmd.status as TaskStatusType) };
   }
 
   async execute(cmd: ListTasksByStatusCommand) {

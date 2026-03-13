@@ -29,31 +29,31 @@ export class TaskId extends Id<"TaskId"> {
   }
 }
 
-export class TaskName extends VO<string> {
+export class TaskDescription extends VO<string> {
   protected _value: string;
 
-  constructor(name: string) {
+  constructor(description: string) {
     super();
-    if (typeof name !== "string")
+    if (typeof description !== "string")
       throw new EntityValidationError(
-        "INVALID_TYPE_TASK_NAME",
-        "Task name is of type string.",
-        { provided_type: typeof name },
+        "INVALID_TYPE_TASK_DESCRIPTION",
+        "Task description is of type string.",
+        { provided_type: typeof description },
       );
-    if ((name = name.trim()).length < 1)
+    if ((description = description.trim()).length < 1)
       throw new EntityValidationError(
-        "EMPTY_TASK_NAME",
-        "Task name cannot be empty.",
+        "EMPTY_TASK_DESCRIPTION",
+        "Task description cannot be empty.",
       );
-    this._value = name;
+    this._value = description;
   }
 }
 
-export class TaskStatus extends VO<"PENDING" | "IN PROGRESS" | "DONE"> {
-  private readonly validValues = ["PENDING", "IN PROGRESS", "DONE"] as const;
-  protected _value: (typeof this.validValues)[number];
+export type TaskStatusType = "todo" | "in-progress" | "done";
+export class TaskStatus extends VO<TaskStatusType> {
+  protected _value: TaskStatusType;
 
-  constructor(status: string) {
+  constructor(status: TaskStatusType) {
     super();
     if (typeof status !== "string")
       throw new EntityValidationError(
@@ -61,46 +61,46 @@ export class TaskStatus extends VO<"PENDING" | "IN PROGRESS" | "DONE"> {
         "Task status is of type string.",
         { provided_type: typeof status },
       );
-    status = status.trim();
-    if (!this.validValues.includes(status as any))
+    status = status.trim() as TaskStatusType;
+    if (!["todo", "in-progress", "done"].includes(status))
       throw new EntityValidationError(
         "INVALID_VALUE_TASK_STATUS",
-        "Task status can only be: 'PENDING' | 'IN PROGRESS' | 'DONE'.",
+        "Task status can only be: 'todo' | 'in-progress' | 'done'.",
       );
-    this._value = status as (typeof this.validValues)[number];
+    this._value = status;
   }
 }
 
 export class Task {
   private readonly _id: TaskId;
-  private _name: TaskName;
+  private _description: TaskDescription;
   private _status: TaskStatus;
 
-  constructor(params: { id: number; name: string }) {
+  constructor(params: { id: number; description: string }) {
     this._id = new TaskId(params.id);
-    this._name = new TaskName(params.name);
-    this._status = new TaskStatus("PENDING");
+    this._description = new TaskDescription(params.description);
+    this._status = new TaskStatus("todo");
   }
 
   public get id() {
     return this._id;
   }
-  public get name() {
-    return this._name;
+  public get description() {
+    return this._description;
   }
   public get status() {
     return this._status;
   }
 
-  rename(name: TaskName) {
-    this._name = name;
+  redescribe(description: TaskDescription) {
+    this._description = description;
   }
 
   markAsInProgress() {
-    this._status = new TaskStatus("IN PROGRESS");
+    this._status = new TaskStatus("in-progress");
   }
 
   markAsDone() {
-    this._status = new TaskStatus("DONE");
+    this._status = new TaskStatus("done");
   }
 }

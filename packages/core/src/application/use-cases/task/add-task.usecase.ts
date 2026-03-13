@@ -1,9 +1,9 @@
-import { Task, TaskName } from "@domain/entities/task";
+import { Task, TaskDescription } from "@domain/entities/task";
 import type { TaskRepository } from "@interfaces/repository/task-repository.interface";
 import type { IdGenerator } from "@interfaces/utils/id-generator.interface";
 
 type AddTaskCommand = {
-  name: string;
+  description: string;
 };
 
 export class AddTask {
@@ -13,14 +13,14 @@ export class AddTask {
   ) {}
 
   serialize(cmd: AddTaskCommand) {
-    return { name: new TaskName(cmd.name) };
+    return { description: new TaskDescription(cmd.description) };
   }
 
   async execute(cmd: AddTaskCommand) {
-    const { name } = this.serialize(cmd);
+    const { description } = this.serialize(cmd);
 
     const id = await this.idGen.generateInt();
-    const task = new Task({ id, name: name.v });
+    const task = new Task({ id, description: description.v });
 
     await this.taskRepo.save(task);
   }

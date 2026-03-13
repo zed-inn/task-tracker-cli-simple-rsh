@@ -1,23 +1,26 @@
-import { TaskId, TaskName } from "@domain/entities/task";
+import { TaskId, TaskDescription } from "@domain/entities/task";
 import type { TaskRepository } from "@interfaces/repository/task-repository.interface";
 
-type UpdateTaskNameCommand = {
+type UpdateTaskDescriptionCommand = {
   id: number;
-  name: string;
+  description: string;
 };
 
-export class UpdateTaskName {
+export class UpdateTaskDescription {
   constructor(private readonly taskRepo: TaskRepository) {}
 
-  serialize(cmd: UpdateTaskNameCommand) {
-    return { id: new TaskId(cmd.id), name: new TaskName(cmd.name) };
+  serialize(cmd: UpdateTaskDescriptionCommand) {
+    return {
+      id: new TaskId(cmd.id),
+      description: new TaskDescription(cmd.description),
+    };
   }
 
-  async execute(cmd: UpdateTaskNameCommand) {
-    const { id, name } = this.serialize(cmd);
+  async execute(cmd: UpdateTaskDescriptionCommand) {
+    const { id, description } = this.serialize(cmd);
 
     const task = await this.taskRepo.getById(id);
-    task.rename(name);
+    task.redescribe(description);
 
     this.taskRepo.save(task);
   }
