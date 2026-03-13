@@ -20,7 +20,7 @@ export class AddTask {
     const { description } = this.serialize(cmd);
 
     const id = await this.idGen.generateInt();
-    const task = new Task({ id, description: description.v });
+    const task = new Task({ id, description: description.v, status: "todo" });
 
     await this.taskRepo.save(task);
   }

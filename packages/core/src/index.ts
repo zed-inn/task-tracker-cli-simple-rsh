@@ -6,16 +6,12 @@ export {
 } from "@domain/entities/task";
 
 export { DomainError } from "@errors/domain.error";
-export { InvalidStatusFlowError } from "@errors/tasks.errors";
+export { InvalidStatusFlowError, NoTaskError } from "@errors/tasks.errors";
 
 export type {
   TaskQuery,
   TaskReadModel,
 } from "@interfaces/queries/task-query.interface";
-export type {
-  KeysetPagination,
-  PaginatedResult,
-} from "@interfaces/queries/pagination";
 export type { TaskRepository } from "@interfaces/repository/task-repository.interface";
 export type { IdGenerator } from "@interfaces/utils/id-generator.interface";
 

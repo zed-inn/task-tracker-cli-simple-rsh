@@ -24,7 +24,10 @@ export class UpdateTaskStatus {
 
     if (task.status.v === "todo" && status.v === "in-progress")
       task.markAsInProgress();
-    else if (task.status.v === "in-progress" && status.v === "done")
+    else if (
+      (task.status.v === "todo" || task.status.v === "in-progress") &&
+      status.v === "done"
+    )
       task.markAsDone();
     else throw new InvalidStatusFlowError(task.status.v, status.v);
 

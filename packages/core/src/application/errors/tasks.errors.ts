@@ -8,3 +8,12 @@ export class InvalidStatusFlowError extends DomainError {
     super(`Status of task cannot go from '${statusOld}' to '${statusNew}'.`);
   }
 }
+
+export class NoTaskError extends DomainError {
+  readonly error: string = "not_found";
+  readonly code: string = "TASK_NOT_FOUND";
+
+  constructor() {
+    super("The requested task does not exist.");
+  }
+}

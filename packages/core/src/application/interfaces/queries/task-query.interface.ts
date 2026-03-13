@@ -1,8 +1,7 @@
 import type { TaskStatus, TaskStatusType } from "@domain/entities/task";
-import type { KeysetPagination, PaginatedResult } from "./pagination";
 
 export interface TaskReadModel {
-  id: string;
+  id: number;
   description: string;
   status: TaskStatusType;
   createdAt: Date;
@@ -10,9 +9,6 @@ export interface TaskReadModel {
 }
 
 export interface TaskQuery {
-  list(pagination: KeysetPagination): Promise<PaginatedResult<TaskReadModel>>;
-  listByStatus(
-    status: TaskStatus,
-    pagination: KeysetPagination,
-  ): Promise<PaginatedResult<TaskReadModel>>;
+  list(): Promise<TaskReadModel[]>;
+  listByStatus(status: TaskStatus): Promise<TaskReadModel[]>;
 }

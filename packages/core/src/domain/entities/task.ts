@@ -76,10 +76,14 @@ export class Task {
   private _description: TaskDescription;
   private _status: TaskStatus;
 
-  constructor(params: { id: number; description: string }) {
+  constructor(params: {
+    id: number;
+    description: string;
+    status: TaskStatusType;
+  }) {
     this._id = new TaskId(params.id);
     this._description = new TaskDescription(params.description);
-    this._status = new TaskStatus("todo");
+    this._status = new TaskStatus(params.status);
   }
 
   public get id() {
