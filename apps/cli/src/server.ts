@@ -2,6 +2,7 @@ import { core } from "@config/core.js";
 import { InvalidCommandError } from "@errors/server.error.js";
 import {
   AddTaskSchema,
+  DeleteTaskSchema,
   ListTasksByStatusSchema,
   UpdateTaskDescriptionSchema,
   UpdateTaskStatusSchema,
@@ -33,14 +34,19 @@ async function main() {
         await core.updateTaskStatus.execute(
           UpdateTaskStatusSchema.parse({ id: args[0], status: "in-progress" }),
         );
-        console.log("Marked as In progress");
+        console.log("Marked as In progress.");
         break;
 
       case "mark-done":
         await core.updateTaskStatus.execute(
           UpdateTaskStatusSchema.parse({ id: args[0], status: "done" }),
         );
-        console.log("Marked as Done");
+        console.log("Marked as Done.");
+        break;
+
+      case "delete":
+        await core.deleteTask.execute(DeleteTaskSchema.parse({ id: args[0] }));
+        console.log("Task deleted.");
         break;
 
       case "list":

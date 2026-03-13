@@ -13,6 +13,10 @@ export const UpdateTaskStatusSchema = TaskModel.pick({
   status: true,
 });
 
+export const DeleteTaskSchema = TaskModel.pick({
+  id: true,
+});
+
 export const ListTasksByStatusSchema = TaskModel.pick({
   status: true,
 });
