@@ -1,5 +1,5 @@
 {
-  "name": "kanban",
+  "name": "task_tracker",
   "private": true,
   "workspaces": [
     "apps/*",
