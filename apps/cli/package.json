@@ -1,0 +1,28 @@
+{
+  "name": "task-tracker-cli",
+  "version": "1.0.0",
+  "description": "CLI app of task tracker",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
+    "build": "npm run clean && npx tsc && npx tsc-alias",
+    "dev": "nodemon",
+    "start": "node dist/index.js"
+  },
+  "author": "zed",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "task_tracker_core": "*",
+    "uuid": "^13.0.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
