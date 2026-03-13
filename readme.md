@@ -1,4 +1,4 @@
-# Task Tracker CLI (Clean Architecture Edition)
+# Task Tracker CLI
 
 A command-line interface (CLI) application to track and manage tasks.
 
